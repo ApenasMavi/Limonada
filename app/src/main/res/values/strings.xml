@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Limonada</string>
+    <string name="limoeiro">Limoeiro</string>
+    <string name="limao">Limão</string>
+    <string name="limonada">Limonada</string>
+    <string name="copo">Copo</string>
+
+</resources>
