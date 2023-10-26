@@ -48,34 +48,45 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Limonada() {
     var Clicar by remember{mutableStateOf(1)}
-    var Image =1
+    var Imagem =1
     var text= 1
-    var modifierImage = Modifier
+    var onClickImagem = {}
+    var QTDClick by remember{ mutableStateOf(0) }
+
     when (Clicar) {
-        1-> { Image= R.drawable.limoeiro
-            text= R.string.limoeiro
-            modifierImage.clickable {
-                Clicar=2 }
-        }
-        2-> { Image= R.drawable.limao
-            text= R.string.limao
-            modifierImage.clickable {
-                Clicar=3
-            }
-        }
-        3-> { Image= R.drawable.copo_limonada
-            text= R.string.limonada
-            modifierImage.clickable {
-                Clicar=4
-            }
-        }
-        else-> { Image=R.drawable.copo
-            text= R.string.copo
-            modifierImage.clickable {
-                Clicar=1
+        1 -> {
+            Imagem = R.drawable.limoeiro
+            text = R.string.limoeiro
+            onClickImagem = {
+                Clicar = 2
+                QTDClick = (2..4).random()
             }
         }
 
+        2 -> {
+            Imagem = R.drawable.limao
+            text = R.string.limao
+            onClickImagem = {
+                if (QTDClick>0)
+                    QTDClick--
+                else
+                Clicar = 3
+            }
+        }
+
+        3 -> {
+            Imagem = R.drawable.copo_limonada
+            text = R.string.limonada
+            onClickImagem = { Clicar = 4
+            }
+        }
+
+        else -> {
+            Imagem = R.drawable.copo
+            text = R.string.copo
+            onClickImagem = { Clicar = 1
+            }
+        }
 
 
     }
@@ -85,20 +96,17 @@ fun Limonada() {
         modifier = Modifier.fillMaxSize()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.limoeiro),
+            painter = painterResource(id = Imagem),
             contentDescription = null,
             modifier = Modifier
-                .clickable {},
-        )
+                .clickable (onClick = onClickImagem),
 
         )
         Text(
-            text = stringResource(R.string.limoeiro)
+            text = stringResource(text)
         )
 
 
     }
-
-
 }
 
